@@ -1,3 +1,7 @@
+'use strict'
+require("dotenv").config();
+require("./src/configs/discord.config");
+
 const express = require("express");
 const PORT = process.env.PORT || 6060;
 const app = express();
