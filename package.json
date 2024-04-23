@@ -1,0 +1,22 @@
+{
+    "name": "amsterdam-sys-app",
+    "version": "1.0.0",
+    "description": "Uma aplicação Node.js que utiliza api do discord",
+    "main": "app.js",
+    "scripts": {
+        "start": "nodemon app.js",
+        "test": "echo \"Error: nenhum teste especificado\" && exit 1"
+    },
+    "author": "Rhans MM",
+    "license": "ISC",
+    "dependencies": {
+        "dotenv": "^16.4.5",
+        "express": "^4.19.2",
+        "nodemon": "^3.1.0",
+        "sequelize": "^6.37.3",
+        "sqlite3": "^5.1.7"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.0"
+    }
+}
