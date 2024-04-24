@@ -1,24 +1,27 @@
 const router = require("express").Router();
-const Tag = require("../models/tags");
-const AppController = require("../controllers/app.controller");
+// const Tag = require("../models/tags");
 
-// router.post('/send-img', [], QuoteController.register);
+const AppController = require("../controllers/app.controller");
+const HubController = require("../controllers/hub.controller");
 
 router.get('/', (req, res) => {
     res.render('index');
 });
 
-router.post("/data", async (req, res) => {
-    const { name, desc } = req.body;
-    try {
-      // Inserir os dados no banco de dados usando Sequelize
-      const newUser = await Tag.create({ name, desc }); // Cria um novo usuário com os dados fornecidos
-      res.json({ message: "User added successfully", userId: newUser.id });
-    } catch (error) {
-      console.error('Error adding user:', error);
-      res.status(500).json({ error: 'Error adding user' });
-    }
-  });
+router.post('/reg-tools', [], HubController.regTools);
+router.post('/reg-shorts', [], HubController.regShorts);
+
+// router.post("/data", async (req, res) => {
+//     const { name, description } = req.body;
+//     try {
+//       // Inserir os dados no banco de dados usando Sequelize
+//       const newUser = await Tag.create({ name, description }); // Cria um novo usuário com os dados fornecidos
+//       res.json({ message: "User added successfully", userId: newUser.id });
+//     } catch (error) {
+//       console.error('Error adding user:', error);
+//       res.status(500).json({ error: 'Error adding user' });
+//     }
+//   });
 
 // router.get('/quotes', async (req, res) => {
 //     try {
