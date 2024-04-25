@@ -9,7 +9,8 @@ const Tools = database.define('Tools', {
         allowNull: false,
         unique: true // Garante que o nome seja único
     },
-    iconUrl: Sequelize.STRING
+    iconUrl: Sequelize.STRING,
+    desc: Sequelize.STRING // Adicionando a nova coluna description
 });
 
 // Define o modelo Links
