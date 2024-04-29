@@ -1,8 +1,0 @@
-services:
-  amsterdam-sys-app:
-    build: .
-    ports:
-      - "8002:6060"
-    volumes:
-      - .:/app
-    command: ["nodemon", "app.js"]

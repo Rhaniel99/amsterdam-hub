@@ -2,15 +2,16 @@ FROM node:lts-alpine
 
 WORKDIR /app
 
+ENV PATH /app/node_modules/.bin:$PATH
+
 COPY package*.json ./
 
-# Mude temporariamente para o usuário root
+COPY package-lock.json ./
 
-# Execute o npm install com permissões de root
-RUN npm install && npm install -g nodemon
+RUN npm install
 
-COPY . .
+COPY . ./
 
-EXPOSE 6060
+EXPOSE 3000
 
 CMD ["npm", "start"]
