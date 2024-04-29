@@ -33,7 +33,7 @@ async function handleSelection(interaction) {
       value: command.name,
       inline: false,
     });
-  });
+  }); 
   embedCommand
     .setTimestamp()
     .setFooter({
