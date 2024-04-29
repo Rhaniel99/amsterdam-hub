@@ -1,29 +1,35 @@
-const { REST, Routes } = require("discord.js");
-// dotenv
-const dotenv = require("dotenv");
+// Importação dos módulos do discord.js
+import { REST } from 'discord.js';
+import { Routes } from 'discord.js';
+
+// Importação do dotenv para configuração das variáveis de ambiente
+import dotenv from 'dotenv';
 dotenv.config();
 const { TOKEN, CLIENT_ID, GUILD_ID } = process.env;
 
-// importação dos comandos
-const fs = require("node:fs");
-const path = require("node:path");
-const commandPath = path.join(__dirname,"src", "commands");
-const commandFiles = fs
-  .readdirSync(commandPath)
-  .filter((file) => file.endsWith(".js"));
+// Importação dos comandos
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+// Obter o diretório atual do arquivo
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Agora você pode usar __dirname normalmente
+const commandPath = path.join(__dirname, 'src', 'commands');
+const commandFiles = fs.readdirSync(commandPath).filter((file) => file.endsWith('.js'));
 
 const commands = [];
 
 for (const file of commandFiles) {
-  const command = require(`${commandPath}/${file}`);
+  const { default: command } = await import(`${commandPath}/${file}`);
   commands.push(command.data.toJSON());
 }
 
-// instância rest
-const rest = new REST({ version: "10" }).setToken(TOKEN);
+// Instância REST
+const rest = new REST({ version: '10' }).setToken(TOKEN);
 
-// deploy
-
+// Deploy dos comandos
 (async () => {
   try {
     console.log(`Resetando ${commands.length} comandos...`);
@@ -32,7 +38,7 @@ const rest = new REST({ version: "10" }).setToken(TOKEN);
       Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
       { body: commands }
     );
-    console.log("comandos registrados com sucesso!");
+    console.log('Comandos registrados com sucesso!');
   } catch (error) {
     console.error(error);
   }

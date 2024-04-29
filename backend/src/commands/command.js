@@ -1,4 +1,5 @@
 // hub.js
+
 import { 
   SlashCommandBuilder, 
   ActionRowBuilder, 
@@ -16,7 +17,7 @@ async function handleSelection(interaction) {
     where: { ToolId: selectedValue },
   });
   const embedCommand = new EmbedBuilder()
-    .setColor("#0099ff")
+    .setColor("#FFFFFF")
     .setTitle(`Lista de Commandos`)
     .setAuthor({
       name: `${tool.name.charAt(0).toUpperCase()}${tool.name

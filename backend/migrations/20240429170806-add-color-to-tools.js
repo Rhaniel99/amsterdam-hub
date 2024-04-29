@@ -1,12 +1,9 @@
-'use strict';
+import { DataTypes } from 'sequelize';
 
-/** @type {import('sequelize-cli').Migration} */
-'use strict';
-
-module.exports = {
+export default {
     up: async (queryInterface, Sequelize) => {
         await queryInterface.addColumn('Tools', 'color', {
-            type: Sequelize.STRING
+            type: DataTypes.STRING
         });
     },
 
