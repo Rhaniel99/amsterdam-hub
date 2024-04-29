@@ -1,6 +1,11 @@
 // hub.js
-const { SlashCommandBuilder, ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require("discord.js");
-const Tags = require("../models/tags");
+import { 
+  SlashCommandBuilder, 
+  ActionRowBuilder, 
+  StringSelectMenuBuilder,
+  StringSelectMenuOptionBuilder,
+  EmbedBuilder, } 
+from 'discord.js';
 
 // Função para lidar com a resposta da seleção
 async function handleSelection(interaction) {
@@ -12,7 +17,7 @@ async function handleSelection(interaction) {
   await interaction.reply(`Você selecionou: ${selectedValue}`);
 }
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("hub")
     .setDescription("apenas um teste"),

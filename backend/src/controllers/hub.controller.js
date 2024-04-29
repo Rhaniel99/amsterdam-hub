@@ -1,12 +1,11 @@
-const multer = require("multer");
-const path = require("node:path");
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage }).single("iconUrl");
-const sharp = require("sharp");
-const client = require("../configs/discord.config");
-
-const Tools = require("../models/hub").Tools;
-const Shortcuts = require("../models/hub").Shortcuts;
+import path from 'path';
+import multer from 'multer';
+import { memoryStorage } from 'multer';
+const storage = memoryStorage();
+const upload = multer({ storage }).single("iconUrl");
+import sharp from 'sharp';
+import client from '../configs/discord.config.js'; // Caminho para o arquivo de rotas
+import { Shortcuts, Tools } from '../models/hub.js';
 
 const regTools = async (req, res) => {
   upload(req, res, async function (err) {
@@ -132,7 +131,4 @@ function sendIMG(client, iconUrl, tools) {
   });
 }
 
-module.exports = {
-  regTools,
-  regShorts,
-};
+export { regShorts, regTools };

@@ -1,7 +1,7 @@
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const Tags = require("../models/tags");
+import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
+import {Tags} from '../models/tags.js';
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("tags-all")
     .setDescription("Retorna a descrição de todas as tags."),

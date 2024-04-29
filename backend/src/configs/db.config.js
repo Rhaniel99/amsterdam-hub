@@ -1,14 +1,17 @@
-const Sequelize = require("sequelize");
-const path = require("path");
+import { fileURLToPath } from 'url';
+import path from 'path';
+import Sequelize from 'sequelize';
 
-const databasePath = path.resolve(__dirname, "../../data/db-amsterdam.sqlite");
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const databasePath = path.resolve(__dirname, '../../data/db-amsterdam.sqlite');
 
 const sequelize = new Sequelize({
   dialect: 'sqlite',
   storage: databasePath,
 });
 
-sequelize.sync() // Sincroniza todos os modelos com o banco de dados
+sequelize.sync()
   .then(() => {
     console.log('Todos os modelos foram sincronizados com o banco de dados.');
   })
@@ -16,4 +19,4 @@ sequelize.sync() // Sincroniza todos os modelos com o banco de dados
     console.error('Erro ao sincronizar os modelos com o banco de dados:', error);
   });
 
-module.exports = sequelize;
+export default sequelize;

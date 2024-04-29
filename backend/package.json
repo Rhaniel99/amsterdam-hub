@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "Uma aplicação Node.js que utiliza api do discord",
     "main": "app.js",
+    "type": "module",
     "scripts": {
         "start": "nodemon app.js",
         "test": "echo \"Error: nenhum teste especificado\" && exit 1"

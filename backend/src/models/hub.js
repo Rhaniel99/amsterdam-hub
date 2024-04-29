@@ -1,6 +1,6 @@
 // Importa o Sequelize e o objeto de configuração do banco de dados
-const Sequelize = require("sequelize");
-const database = require("../configs/db.config");
+import Sequelize from 'sequelize';
+import database from '../configs/db.config.js';
 
 // Define o modelo Ferramentas
 const Tools = database.define('Tools', {
@@ -53,9 +53,9 @@ Tools.hasMany(Snippets);
 Tools.hasMany(Shortcuts);
 
 // Exporta os modelos
-module.exports = {
+export {
     Tools,
     Links,
     Snippets,
-    Shortcuts
-};
+    Shortcuts,
+  };

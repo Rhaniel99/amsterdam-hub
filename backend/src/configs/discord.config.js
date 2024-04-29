@@ -1,35 +1,43 @@
 // Require the necessary discord.js classes
-const { Client, Events, GatewayIntentBits, Collection } = require("discord.js");
-// importação dos comandos
-const fs = require("node:fs");
-const path = require("node:path");
-const commandPath = path.join(__dirname, "../commands");
-const commandFiles = fs
-  .readdirSync(commandPath)
-  .filter((file) => file.endsWith(".js"));
+import { Client, Events, GatewayIntentBits, Collection } from 'discord.js';
+import { readdir } from 'fs/promises';
+import { join, dirname } from 'path';
+
+// Obtendo o caminho do diretório do módulo atual
+const __dirname = dirname(new URL(import.meta.url).pathname);
+
+const commandPath = join(__dirname, '../commands');
+
+// Função assíncrona para ler diretórios e filtrar arquivos
+const getCommandFiles = async () => {
+  const files = await readdir(commandPath);
+  return files.filter((file) => file.endsWith('.js'));
+};
+
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.commands = new Collection();
 
-for (const file of commandFiles) {
-  const filePath = path.join(commandPath, file);
-  const command = require(filePath);
+(async () => {
+  const commandFiles = await getCommandFiles(); // Chamada assíncrona
 
-  if ("data" in command && "execute" in command) {
-    client.commands.set(command.data.name, command);
-  } else {
-    console.log(`Esse comando em ${filePath}`);
+  for (const file of commandFiles) {
+    const filePath = join(commandPath, file);
+    const command = await import(filePath); // Import dinâmico
+
+    if ("data" in command.default && "execute" in command.default) {
+      client.commands.set(command.default.data.name, command.default);
+    } else {
+      console.log(`Esse comando em ${filePath}`);
+    }
   }
-}
+})();
 
-// Login Bot
+// Login Bot e outros eventos
 client.once(Events.ClientReady, (c) => {
   console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
-client.login(process.env.TOKEN);
-
-// Listener de interações com o bot
 client.on(Events.InteractionCreate, async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
   
@@ -46,4 +54,6 @@ client.on(Events.InteractionCreate, async (interaction) => {
   }
 });
 
-module.exports = client;
+client.login(process.env.TOKEN);
+
+export default client;

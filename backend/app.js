@@ -1,14 +1,15 @@
 'use strict'
-require("dotenv").config();
-require("./src/configs/discord.config");
+import 'dotenv/config';
+import './src/configs/discord.config.js';
 
-const express = require("express");
+import express from 'express';
 const PORT = process.env.PORT || 6060;
 const app = express();
-const database = require("./src/configs/db.config");
+import database from './src/configs/db.config.js'; // Caminho para o arquivo de rotas
+import rotas from './src/routes/app.routes.js'; // Caminho para o arquivo de rotas
 
 app.use(express.json());
-app.use("/api/app", require("./src/routes/app.routes"));
+app.use("/api/app", rotas);
 
 app.listen(PORT, async () => {
     console.log(`Rodando na porta ${PORT}`);

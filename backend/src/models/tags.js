@@ -1,5 +1,5 @@
-const database = require("../configs/db.config");
-const Sequelize = require("sequelize");
+import Sequelize from 'sequelize';
+import database from '../configs/db.config.js';
 
 const Tags = database.define('tags', {
 	name: {
@@ -15,4 +15,6 @@ const Tags = database.define('tags', {
 	},
 });
 
-module.exports = Tags;
+export {
+    Tags,
+  };

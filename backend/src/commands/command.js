@@ -1,13 +1,12 @@
 // hub.js
-const {
-  SlashCommandBuilder,
-  ActionRowBuilder,
+import { 
+  SlashCommandBuilder, 
+  ActionRowBuilder, 
   StringSelectMenuBuilder,
   StringSelectMenuOptionBuilder,
-  EmbedBuilder,
-} = require("discord.js");
-const Tools = require("../models/hub").Tools;
-const Shortcuts = require("../models/hub").Shortcuts;
+  EmbedBuilder, } 
+from 'discord.js';
+import {Shortcuts, Tools} from '../models/hub.js';
 
 // Função para lidar com a resposta da seleção
 async function handleSelection(interaction) {
@@ -48,7 +47,7 @@ async function handleSelection(interaction) {
   await interaction.reply({ embeds: [embedCommand] });
 }
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("comandos")
     .setDescription("Atalhos e comandos para diversas ferramentas!"),
