@@ -16,15 +16,15 @@ const regTools = async (req, res) => {
       });
     }
 
-    let { name, desc } = req.body;
+    let { name, desc, color } = req.body;
     // Convertendo a primeira letra do nome e da descrição para maiúscula
-    name = name.toLowerCase().replace(/^\w/, (c) => c.toUpperCase());
-    desc = desc.toLowerCase().replace(/^\w/, (c) => c.toUpperCase());
-
+    if (desc) {
+      // Convertendo a primeira letra do nome e da descrição para maiúscula
+      name = name.toLowerCase().replace(/^\w/, (c) => c.toUpperCase());
+      desc = desc.toLowerCase().replace(/^\w/, (c) => c.toUpperCase());
+    }
     const iconUrl = req.file;
-    console.log()
-    const tools = await Tools.create({ name, desc }); // Usando Tools.create para salvar apenas na tabela Tools
-
+    const tools = await Tools.create({ name, desc, color }); // Usando Tools.create para salvar apenas na tabela Tools
     try {
       await sendIMG(client, iconUrl, tools);
       return res.json({
@@ -64,6 +64,20 @@ const regShorts = async (req, res) => {
     console.error("Erro ao registrar atalho:", error);
     res.status(500).json({ message: "Erro ao registrar atalho" });
   }
+};
+
+const getTools = async (_, res) => {
+  const tools = await Tools.findAll();
+  res.json(tools);
+};
+
+const getShots = async (req, res) => {
+  let { id } = req.body;
+  if (id) {
+    const shortcuts = await Shortcuts.findAll({ where: { toolId: id } });
+    return res.json(shortcuts);
+  }
+  return res.status(404).json({ message: 'Não encontrada', id });
 };
 
 function sendIMG(client, iconUrl, tools) {
@@ -130,4 +144,4 @@ function sendIMG(client, iconUrl, tools) {
   });
 }
 
-export { regShorts, regTools };
+export { regShorts, regTools, getTools, getShots };

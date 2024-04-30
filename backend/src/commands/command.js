@@ -17,7 +17,7 @@ async function handleSelection(interaction) {
     where: { ToolId: selectedValue },
   });
   const embedCommand = new EmbedBuilder()
-    .setColor("#FFFFFF")
+    .setColor(tool.color)
     .setTitle(`Lista de Commandos`)
     .setAuthor({
       name: `${tool.name.charAt(0).toUpperCase()}${tool.name

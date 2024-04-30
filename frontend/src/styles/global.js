@@ -5,7 +5,7 @@ const Global = createGlobalStyle
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Jersey 25', cursive;
+    font-family: "PT Serif", serif;
 }
 
 body {

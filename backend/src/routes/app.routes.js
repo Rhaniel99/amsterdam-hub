@@ -3,15 +3,16 @@ const router = Router();
 // const Tag = require("../models/tags");
 
 // const AppController = require("../controllers/app.controller");
-import { regShorts, regTools } from '../controllers/hub.controller.js';
+import { regShorts, regTools, getTools, getShots } from '../controllers/hub.controller.js';
 
 router.post('/reg-tools', [], regTools);
 router.post('/reg-shorts', [], regShorts);
+router.get('/get-tools', [], getTools);
+router.get('/get-shorts', [], getShots);
 
 router.get('/', (req, res) => {
     res.render('index');
 });
-
 
 // router.post("/data", async (req, res) => {
 //     const { name, description } = req.body;
