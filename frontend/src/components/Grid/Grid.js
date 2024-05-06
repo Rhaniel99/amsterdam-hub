@@ -7,10 +7,8 @@ import { Table, Thead, Tbody, Tr, Th, Td } from "./Grid.styles";
 const Grid = ({ tools }) => {
     const handleAddCircleClick = async (itemId) => {
         try {
-            // await axios.post(`http://localhost:6060/api/app/get-shorts/${itemId}`);
-            // console.log(itemId);
             const res = await axios.get(`http://localhost:6060/api/app/get-shorts/${itemId}`);
-            console.log(itemId);
+            console.log(res);
             // setTools(res.data.sort((a, b) => (a.name > b.name ? 1 : -1)));
             // A requisição foi bem-sucedida, você pode exibir uma mensagem de sucesso ou atualizar a lista de itens se necessário
         } catch (error) {
