@@ -1,38 +1,47 @@
-import React, { Component } from 'react';
-class App extends Component{
-    constructor (props) {
-        super(props);
-        this.state = {
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
+function App() {
+
+    const [tarefas, setTarefas] = useState(() => {
+        const tarefasArmazenadas = localStorage.getItem('tarefas');
+        return tarefasArmazenadas ? JSON.parse(tarefasArmazenadas) : [];
+    });
+
+    const [input, setInput] = useState('');
+    // Quando não há parametros, é executado assim que carrega a tela
+    useEffect(() => {
+        const tarefasStorage = localStorage.getItem('tarefas');
+        if(tarefasStorage){
+            setTarefas(JSON.parse(tarefasStorage));
         }
-        this.frases = ['O riso é a menor distância entre duas pessoas.', 
-        'Deixe de lado as preocupações e seja feliz.',
-        'Realize o óbvio, pense no improvável e conquiste o impossível.',
-        'Acredite em milagres, mas não dependa deles.',
-        'A maior barreira para o sucesso é o medo do fracasso.'];
+    }, [])
+    // Quando há alteração na state abaixo: 
+    useEffect(() => {
+        localStorage.setItem('tarefas', JSON.stringify(tarefas));
+    }, [tarefas])
 
-    }
+    // não executa toda vez o bloco quando há alteração
+    const totalTarefas = useMemo(() => tarefas.length, [tarefas]);
 
-    render () {
-        return (
-            <div>
-              <img src={require('./assets/cinema.jpg')} />
-              <Botao />
-              <h3>Filme número 1 aleatorio</h3>
-            </div>
-        )
-    }
-}
+    // retorna uma função que é melhor para quando tem algo que precise de muito processamento.
+    const handleAdd = useCallback(() => {
+        setTarefas([...tarefas, input])
+        setInput('');
+    }, [tarefas, input])
 
-class Botao extends Component {
-
-    render () {
-        return (
-            <div>
-              <button>Abrir o filme</button>
-            </div>
-        )
-    }      
+    return (
+        <div>
+            <ul>
+                {tarefas.map(tarefa => 
+                <li key={tarefa}>{tarefa}</li>
+                )}
+            </ul>
+            <br/>
+            <strong>{totalTarefas} tarefas</strong><br/>
+            <input type="text" value={input} onChange={e => setInput(e.target.value) } />
+            <button onClick={handleAdd}>Adicionar </button>
+        </div>
+    )
 }
 
 export default App;
