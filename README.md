@@ -12,8 +12,21 @@ Amsterdam Hub é um sistema desenvolvido para armazenar os comandos de ferrament
 - Utilização de imagens como ícones ilustrativos.
 - Exibição de comandos salvos organizados por ferramenta.
 - Desenvolvimento do frontend em ReactJS.
-- Utilização de docker para montar o ambiente de desenvolvimento. 
+- Utilização de Docker para montar o ambiente de desenvolvimento e integração do banco de dados com a ORM Sequelize utilizando o banco de dados SQLite.
+## Instalação
 
+Clone o repositório:
+
+```bash
+  https://github.com/Rhaniel99/amsterdam-hub.git
+  cd amsterdam-hub
+```
+
+Na raiz do repositório, inicie os contêineres e as imagens:
+
+```bash
+  docker compose up -d
+```
 ## Variáveis de Ambiente
 
 Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de ambiente no seu .env, todos são keys e tokens gerados atraves do discordJS.
@@ -28,20 +41,6 @@ Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de
 
 
 
-## Instalação
-
-Clone o repositorio
-
-```bash
-  https://github.com/Rhaniel99/amsterdam-hub.git
-  cd amsterdam-hub
-```
-
-Na raiz do repositorio, suba as imagens e os containers
-
-```bash
-  docker compose up -d
-```
 ## Ferramentas
 - Node.js
 - Express.js
@@ -102,4 +101,16 @@ Certifique-se de enviar os dados no corpo da solicitação. Isso garantirá que 
 
 ![App Screenshot](https://cdn.discordapp.com/attachments/1115111545526030336/1239697906378997821/image.png?ex=6643de25&is=66428ca5&hm=36da307114cb7c21fa3f1666e9ef05e46189110b47f2ae4b6dad83f00e5030ef&)
 
+
+
+## Melhorias
+
+As models sincronizam assim que a conexão com banco de dados SQLITE é conectada.
+
+## Futuras Melhorias
+
+Integrar os endpoits ao front-end react, para o cadastro dos comandos.
+Integrar a possibilidade de cadastrar links ou artigos de tutorias.
+Integrar paginação nos cards do discordJS.
+Integrar uma busca por comando de acordo com o nome do comando ao invés da ferramenta.
 
