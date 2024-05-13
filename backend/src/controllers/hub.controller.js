@@ -72,13 +72,14 @@ const getTools = async (_, res) => {
 };
 
 const getShots = async (req, res) => {
-  let { id } = req.body;
+  let { id } = req.params;
   if (id) {
     const shortcuts = await Shortcuts.findAll({ where: { toolId: id } });
     return res.json(shortcuts);
   }
   return res.status(404).json({ message: 'Não encontrada', id });
 };
+
 
 function sendIMG(client, iconUrl, tools) {
   return new Promise((resolve, reject) => {
