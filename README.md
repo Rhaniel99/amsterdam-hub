@@ -109,8 +109,8 @@ As models sincronizam assim que a conexão com banco de dados SQLITE é conectad
 
 ## Futuras Melhorias
 
-Integrar os endpoits ao front-end react, para o cadastro dos comandos.
-Integrar a possibilidade de cadastrar links ou artigos de tutorias.
-Integrar paginação nos cards do discordJS.
-Integrar uma busca por comando de acordo com o nome do comando ao invés da ferramenta.
+- Integrar os endpoits ao front-end react, para o cadastro dos comandos.
+- Integrar a possibilidade de cadastrar links ou artigos de tutorias.
+- Integrar paginação nos cards do discordJS.
+- Integrar uma busca por comando de acordo com o nome do comando ao invés da ferramenta.
 
