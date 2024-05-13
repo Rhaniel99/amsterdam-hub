@@ -8,7 +8,7 @@ import { regShorts, regTools, getTools, getShots } from '../controllers/hub.cont
 router.post('/reg-tools', [], regTools);
 router.post('/reg-shorts', [], regShorts);
 router.get('/get-tools', [], getTools);
-router.get('/get-shorts', [], getShots);
+router.get('/get-shorts/:id', [], getShots);
 
 router.get('/', (req, res) => {
     res.render('index');

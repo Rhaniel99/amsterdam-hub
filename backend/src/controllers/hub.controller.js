@@ -58,7 +58,7 @@ const regShorts = async (req, res) => {
     // Se a criação for bem-sucedida, envie uma resposta de sucesso
     res
       .status(201)
-      .json({ message: "Atalho registrado com sucesso", data: newShortcut });
+      .json({ message: "Comando registrado com sucesso", data: newShortcut });
   } catch (error) {
     // Se ocorrer um erro, envie uma resposta de erro
     console.error("Erro ao registrar atalho:", error);
@@ -72,7 +72,7 @@ const getTools = async (_, res) => {
 };
 
 const getShots = async (req, res) => {
-  let { id } = req.body;
+  let { id } = req.params;
   if (id) {
     const shortcuts = await Shortcuts.findAll({ where: { toolId: id } });
     return res.json(shortcuts);
