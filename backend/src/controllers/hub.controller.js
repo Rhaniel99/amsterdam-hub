@@ -67,8 +67,19 @@ const regShorts = async (req, res) => {
 };
 
 const getTools = async (_, res) => {
-  const tools = await Tools.findAll();
-  res.json(tools);
+  try {
+    const tools = await Tools.findAll();
+    const toolsWithUrls = await Promise.all(
+      tools.map(async (tool) => {
+        const imageUrl = await regenerateImageUrl(client, tool.iconChannelID, tool.iconMessageID);
+        return { ...tool.toJSON(), iconUrl: imageUrl };
+      })
+    );
+    res.json(toolsWithUrls);
+  } catch (error) {
+    console.error("Erro ao obter ferramentas:", error);
+    res.status(500).json({ success: false, msg: "Erro ao obter ferramentas" });
+  }
 };
 
 const getShots = async (req, res) => {
@@ -125,7 +136,8 @@ function sendIMG(client, iconUrl, tools) {
             const attachment = message.attachments.first();
             const imageUrl = attachment.url;
             console.log("Imagem enviada com sucesso.");
-            tools.iconUrl = imageUrl;
+            tools.iconMessageID = message.id;
+            tools.iconChannelID = channelId;
             return tools.save();
           })
           .then(() => {
@@ -144,4 +156,17 @@ function sendIMG(client, iconUrl, tools) {
   });
 }
 
-export { regShorts, regTools, getTools, getShots };
+async function regenerateImageUrl(client, channelId, messageId) {
+  const channel = await client.channels.fetch(channelId);
+  if (!channel) throw new Error("Canal não encontrado");
+
+  const message = await channel.messages.fetch(messageId);
+  if (!message) throw new Error("Mensagem não encontrada");
+
+  const attachment = message.attachments.first();
+  if (!attachment) throw new Error("Anexo não encontrado na mensagem");
+
+  return attachment.url;
+}
+
+export { regShorts, regTools, getTools, getShots, regenerateImageUrl };

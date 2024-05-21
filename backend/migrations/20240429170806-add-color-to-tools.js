@@ -1,13 +1,12 @@
-import { DataTypes } from 'sequelize';
 
 export default {
-    up: async (queryInterface, Sequelize) => {
+    async up (queryInterface, Sequelize) {
         await queryInterface.addColumn('Tools', 'color', {
-            type: DataTypes.STRING
+            type: Sequelize.STRING
         });
     },
 
-    down: async (queryInterface, Sequelize) => {
+    async down (queryInterface, Sequelize) {
         await queryInterface.removeColumn('Tools', 'color');
     }
 };

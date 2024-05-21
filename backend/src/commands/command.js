@@ -1,5 +1,4 @@
 // hub.js
-
 import { 
   SlashCommandBuilder, 
   ActionRowBuilder, 
@@ -8,6 +7,7 @@ import {
   EmbedBuilder, } 
 from 'discord.js';
 import {Shortcuts, Tools} from '../models/hub.js';
+import { regenerateImageUrl } from '../controllers/hub.controller.js'; // Importando a função
 
 // Função para lidar com a resposta da seleção
 async function handleSelection(interaction) {
@@ -16,6 +16,15 @@ async function handleSelection(interaction) {
   const shortcuts = await Shortcuts.findAll({
     where: { ToolId: selectedValue },
   });
+  const iconChannelID = tool.iconChannelID; // Obtendo o ID do canal do ícone da ferramenta
+  const iconMessageID = tool.iconMessageID;
+
+  const imageUrl = await regenerateImageUrl(
+    interaction.client,
+    iconChannelID,
+    iconMessageID
+  ); 
+
   const embedCommand = new EmbedBuilder()
     .setColor(tool.color)
     .setTitle(`Lista de Commandos`)
@@ -23,9 +32,9 @@ async function handleSelection(interaction) {
       name: `${tool.name.charAt(0).toUpperCase()}${tool.name
         .slice(1)
         .toLowerCase()}`,
-      iconURL: tool.iconUrl,
+      iconURL: imageUrl,
     })
-    .setThumbnail(tool.iconUrl);
+    .setThumbnail(imageUrl);
   embedCommand.addFields({ name: "\u200B", value: "\u200B" });
   shortcuts.forEach((command) => {
     embedCommand.addFields({
@@ -38,7 +47,7 @@ async function handleSelection(interaction) {
     .setTimestamp()
     .setFooter({
       text: "Criado by: Rhanikas",
-      iconURL: tool.iconUrl,
+      iconURL: imageUrl,
     });
   // Verificar se há tags
   if (shortcuts.length === 0) {
