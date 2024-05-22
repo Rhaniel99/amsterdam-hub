@@ -8,7 +8,7 @@ function Favorite() {
         const myList = localStorage.getItem("@primefilmesrhans");
         setMovies(JSON.parse(myList) || []);
     }, []);
-    function deleteMovie(id){
+    function deleteMovie(id){ 
         let filterMovies = movies.filter((movie) => {
             return(movie.id !== id);
         })
