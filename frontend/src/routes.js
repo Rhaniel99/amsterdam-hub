@@ -1,29 +1,25 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Home from './pages/Home';
-import Sobre from './pages/Sobre';
-import Contato from './pages/Contato';
+import Home from "./pages/Home";
+import Movie from "./pages/Movie";
 import Error from "./pages/Error";
-import Produto from "./pages/Produto";
+import Favorite from "./pages/Favorite";
 
+import Header from './components/Header';
 
-import Header from "./components/Header";
+function RoutesApp() {
+  return (
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/favorite" element={<Favorite />} />
+        <Route path="/movie/:id" element={<Movie />} />
 
-
-function RoutesApp(){
-    return (
-        <BrowserRouter>
-            <Header/>
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/sobre" element={<Sobre />} />
-                <Route path="/contato" element={<Contato />} />
-                <Route path="/produto/:id" element={<Produto />} />
-
-                <Route path="*" element={<Error />} />
-            </Routes>
-        </BrowserRouter>
-    )
+        <Route path="*" element={<Error />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default RoutesApp;

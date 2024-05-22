@@ -5,12 +5,8 @@ import './style.css';
 function Header(){
     return (
         <header>
-            <h2>Sujeito Rhans</h2>
-            <div className="menu">
-                <Link to="/">Home</Link>
-                <Link to="/sobre">Sobre</Link>
-                <Link to="/contato">Contato</Link>  
-            </div>
+                <Link className="logo" to="/">Prime Filmes Rhans</Link>
+                <Link className="favoritos" to="/favorite">Meus filmes</Link>
         </header>
     )
 }
