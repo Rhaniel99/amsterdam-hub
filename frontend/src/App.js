@@ -1,7 +1,7 @@
 import GlobalStyle from './styles/global';
 import { toast, ToastContainer } from "react-toastify";
 
-// import Form from "./components/Form/Form.js";
+import Btn from "./components/Buttons/btn.js";
 // import Grid from "./components/Grid/Grid.js";
 import { useState, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
@@ -25,7 +25,7 @@ function App() {
   return (
     <>
     <div>
-      <h1>Teste</h1>
+      <Btn> </Btn>
     </div>
 
     </>
