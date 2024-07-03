@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import styled from "styled-components";
 import axios from "axios";
+import NavBar from './components/Navbar';
 
 // const Container = styled.div`
 //       width: 100%;
@@ -25,7 +26,8 @@ function App() {
   return (
     <>
     <div>
-      <Btn> </Btn>
+      <NavBar />
+      <h1>teste</h1>
     </div>
 
     </>
