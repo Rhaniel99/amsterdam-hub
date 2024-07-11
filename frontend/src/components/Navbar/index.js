@@ -1,23 +1,52 @@
 import React from 'react';
-import { Navbar, Nav, Container } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
+import { Navbar, Button, Modal, Form } from 'react-bootstrap'; //Navbar from 'react-bootstrap;
 
-const NavBar = () => {
+export function NavBar() {
+  const [show, setShow] = React.useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <div>
+    
+    <Navbar className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="#home">Meu Site</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
-            <Nav.Link href="#about">Sobre</Nav.Link>
-            {/* Adicione mais links conforme necessário */}
-          </Nav>
+        <Navbar.Brand href="#home">Rosy System</Navbar.Brand>
+        <Navbar.Toggle />
+        <Navbar.Collapse className="justify-content-end">
+        <Button variant="primary" onClick={handleShow}>
+          Adicionar aluno
+        </Button>
         </Navbar.Collapse>
       </Container>
     </Navbar>
+
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Modal title</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+
+        <Form.Control type="text" placeholder="Readonly input here..." />
+        
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary">Understood</Button>
+
+        </Modal.Footer>
+      </Modal>
+    </div>
+
   );
 }
-
-export default NavBar;

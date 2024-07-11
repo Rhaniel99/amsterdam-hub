@@ -10,11 +10,19 @@ const Global = createGlobalStyle
 
 body {
     width: 100vw;
-    heigth: 100vh;
+    height: 50vh;
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: #f2f2f2;
 }
+.App {
+
+    margin-top: 60px ;
+    width: 50vw;
+    height: 50vh;
+}
+
 `;
 
 export default Global;

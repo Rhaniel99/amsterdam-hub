@@ -6,7 +6,7 @@ export const createPayment = async (req, res) => {
     try {
       const student = await Students.findByPk(studentId);
       if (!student) {
-        return res.status(404).json({ error: 'Student not found' });
+        return res.status(404).json({ error: 'Estudante não encontrado!' });
       }
   
       const payment = await Payments.create({ studentId });
